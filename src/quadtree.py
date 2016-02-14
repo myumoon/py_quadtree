@@ -19,9 +19,17 @@ class QuadTree(object):
 		assert self.__begin.x < self.__end.x
 		assert self.__begin.y < self.__end.y
 		self.__size  = math.Vec2(self.__end - self.__begin)
+		self.clear()
 
 	def add(self, obj):
-		pass
+		idx = self.getIndexOf(obj)
+		if 0 <= idx:
+			self.linerTree[idx].append(obj)
+			
+	def clear(self):
+		u"""ツリーの内容をクリア
+		"""
+		self.linerTree = [[] for i in range(2 ** (2 * self.__level))]
 		
 	def traverse(self, traverser):
 		"""ツリー内を探索
@@ -115,9 +123,11 @@ octtree = QuadTree(3, math.Vec3(0, 0, 0), math.Vec3(4, 4, 4))
 #octtree.traverse(camera)
 
 #print octtree._OctTree__getCommonLevel(16, 23)
-print octtree.getIndexOf(math.Sphere(math.Vec2(1, 1), 0.8))
-print octtree.getIndexOf(math.Sphere(math.Vec2(2, 2), 0.8))
-print octtree.getIndexOf(math.Sphere(math.Vec2(3, 3), 0.8))
-print octtree.getIndexOf(math.Sphere(math.Vec2(0.5, 0.5), 0.1))
-print octtree.getIndexOf(math.Sphere(math.Vec2(3.5, 3.5), 0.1))
+#print octtree.getIndexOf(math.Sphere(math.Vec2(1, 1), 0.8))
+#print octtree.getIndexOf(math.Sphere(math.Vec2(2, 2), 0.8))
+#print octtree.getIndexOf(math.Sphere(math.Vec2(3, 3), 0.8))
+#print octtree.getIndexOf(math.Sphere(math.Vec2(0.5, 0.5), 0.1))
+#print octtree.getIndexOf(math.Sphere(math.Vec2(3.5, 3.5), 0.1))
+octtree.add(math.Sphere(math.Vec2(3.5, 3.5), 0.1))
+
 
