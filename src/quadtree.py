@@ -22,6 +22,8 @@ class QuadTree(object):
 		self.clear()
 
 	def add(self, obj):
+		u"""オブジェクトをツリーに登録
+		"""
 		idx = self.getIndexOf(obj)
 		if 0 <= idx:
 			self.linerTree[idx].append(obj)
@@ -29,6 +31,7 @@ class QuadTree(object):
 	def clear(self):
 		u"""ツリーの内容をクリア
 		"""
+		# 線形ツリーに必要な要素分だけ確保
 		self.linerTree = [[] for i in range(2 ** (2 * self.__level))]
 		
 	def traverse(self, traverser):
